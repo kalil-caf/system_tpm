@@ -23,6 +23,11 @@
         'protobuf-lite',
       ],
     },
+    'include_dirs': [
+      # We need this include dir because we include all the local code as
+      # "attestation/...".
+      '<(platform2_root)/../aosp/system/',
+    ],
   },
   'targets': [
     # A library for just the protobufs.
@@ -47,7 +52,7 @@
         'common/print_common_proto.cc',
         'common/print_interface_proto.cc',
       ],
-      'includes': ['../common-mk/protoc.gypi'],
+      'includes': ['../../../platform2/common-mk/protoc.gypi'],
     },
     # A library for common code.
     {
@@ -157,7 +162,7 @@
         {
           'target_name': 'attestation_testrunner',
           'type': 'executable',
-          'includes': ['../common-mk/common_test.gypi'],
+          'includes': ['../../../platform2/common-mk/common_test.gypi'],
           'variables': {
             'deps': [
               'libchrome-test-<(libbase_ver)',
