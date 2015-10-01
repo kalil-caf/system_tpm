@@ -46,7 +46,7 @@ bool MockTpmNvram::FakeDefineNvram(uint32_t index, size_t length) {
     return false;
   }
   NvSpace ns;
-  ns.data.resize(length, "\xff");
+  ns.data.resize(length, '\xff');
   ns.written = false;
   nvram_map_[index] = ns;
   return true;
