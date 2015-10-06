@@ -85,8 +85,8 @@
       'conditions': [
         ['USE_tpm2 == 1', {
           'sources': [
-            'server/tpm2_status_impl.cc',
             'server/tpm2_initializer_impl.cc',
+            'server/tpm2_status_impl.cc',
           ],
           'all_dependent_settings': {
             'libraries': [
@@ -97,8 +97,9 @@
         ['USE_tpm2 == 0', {
           'sources': [
             'server/tpm_connection.cc',
-            'server/tpm_status_impl.cc',
             'server/tpm_initializer_impl.cc',
+            'server/tpm_nvram_impl.cc',
+            'server/tpm_status_impl.cc',
           ],
           'all_dependent_settings': {
             'libraries': [
