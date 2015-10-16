@@ -30,7 +30,7 @@
 #include "attestation/server/attestation_service.h"
 #include "attestation/server/dbus_service.h"
 
-#include <brillo/libminijail.h>
+#include <chromeos/libminijail.h>
 
 namespace {
 
