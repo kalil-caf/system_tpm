@@ -21,7 +21,6 @@
 #include <base/command_line.h>
 #include <base/threading/thread.h>
 #include <brillo/daemons/dbus_daemon.h>
-#include <brillo/libminijail.h>
 #include <brillo/minijail/minijail.h>
 #include <brillo/syslog_logging.h>
 #include <brillo/userdb_utils.h>

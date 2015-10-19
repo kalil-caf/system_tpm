@@ -85,6 +85,7 @@
     {
       'target_name': 'trunks_test',
       'type': 'static_library',
+      'standalone_static_library': 1,
       'sources': [
         'mock_authorization_delegate.cc',
         'mock_blob_parser.cc',
