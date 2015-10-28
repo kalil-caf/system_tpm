@@ -18,8 +18,8 @@
   'target_defaults': {
     'variables': {
       'deps': [  # This is a list of pkg-config dependencies
+        'libbrillo-<(libbase_ver)',
         'libchrome-<(libbase_ver)',
-        'libchromeos-<(libbase_ver)',
         'protobuf-lite',
       ],
     },
@@ -165,8 +165,8 @@
           'includes': ['../../../platform2/common-mk/common_test.gypi'],
           'variables': {
             'deps': [
+              'libbrillo-test-<(libbase_ver)',
               'libchrome-test-<(libbase_ver)',
-              'libchromeos-test-<(libbase_ver)',
             ],
           },
           'sources': [
