@@ -16,7 +16,7 @@
 
 {
   'target_defaults': {
-    'includes': ['../../../platform2/common-mk/common.gypi'],
+    'includes': ['../../../../platform2/common-mk/common.gypi'],
     'variables': {
       'deps': [  # This is a list of pkg-config dependencies
         'libbrillo-<(libbase_ver)',
@@ -28,7 +28,7 @@
     'include_dirs': [
       # We need this include dir because we include all the local code as
       # "tpm_manager/...".
-      '<(platform2_root)/../aosp/system/',
+      '<(platform2_root)/../aosp/system/tpm/',
     ],
     'defines': [ 'USE_TPM2=<(USE_tpm2)' ],
   },
@@ -51,7 +51,7 @@
         'common/print_tpm_nvram_interface_proto.cc',
         'common/print_tpm_ownership_interface_proto.cc',
       ],
-      'includes': ['../../../platform2/common-mk/protoc.gypi'],
+      'includes': ['../../../../platform2/common-mk/protoc.gypi'],
     },
     # A shared library for clients.
     {
@@ -142,7 +142,7 @@
         {
           'target_name': 'tpm_manager_testrunner',
           'type': 'executable',
-          'includes': ['../../../platform2/common-mk/common_test.gypi'],
+          'includes': ['../../../../platform2/common-mk/common_test.gypi'],
           'variables': {
             'deps': [
               'libbrillo-test-<(libbase_ver)',

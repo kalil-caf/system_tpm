@@ -16,7 +16,7 @@
 
 {
   'target_defaults': {
-    'includes': ['../../../platform2/common-mk/common.gypi'],
+    'includes': ['../../../../platform2/common-mk/common.gypi'],
     'variables': {
       'deps': [  # This is a list of pkg-config dependencies
         'libbrillo-<(libbase_ver)',
@@ -28,7 +28,7 @@
     'include_dirs': [
       # We need this include dir because we include all the local code as
       # "trunks/...".
-      '<(platform2_root)/../aosp/system/',
+      '<(platform2_root)/../aosp/system/tpm/',
     ],
   },
   'targets': [
@@ -42,7 +42,7 @@
       'sources': [
         '<(proto_in_dir)/dbus_interface.proto',
       ],
-      'includes': ['../../../platform2/common-mk/protoc.gypi'],
+      'includes': ['../../../../platform2/common-mk/protoc.gypi'],
     },
     {
       'target_name': 'trunks',
@@ -156,7 +156,7 @@
         {
           'target_name': 'trunks_testrunner',
           'type': 'executable',
-          'includes': ['../../../platform2/common-mk/common_test.gypi'],
+          'includes': ['../../../../platform2/common-mk/common_test.gypi'],
           'sources': [
             'background_command_transceiver_test.cc',
             'hmac_authorization_delegate_test.cc',

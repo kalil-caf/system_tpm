@@ -26,7 +26,7 @@
     'include_dirs': [
       # We need this include dir because we include all the local code as
       # "attestation/...".
-      '<(platform2_root)/../aosp/system/',
+      '<(platform2_root)/../aosp/system/tpm',
     ],
   },
   'targets': [
@@ -52,7 +52,7 @@
         'common/print_common_proto.cc',
         'common/print_interface_proto.cc',
       ],
-      'includes': ['../../../platform2/common-mk/protoc.gypi'],
+      'includes': ['../../../../platform2/common-mk/protoc.gypi'],
     },
     # A library for common code.
     {
@@ -162,7 +162,7 @@
         {
           'target_name': 'attestation_testrunner',
           'type': 'executable',
-          'includes': ['../../../platform2/common-mk/common_test.gypi'],
+          'includes': ['../../../../platform2/common-mk/common_test.gypi'],
           'variables': {
             'deps': [
               'libbrillo-test-<(libbase_ver)',
