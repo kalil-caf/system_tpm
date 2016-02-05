@@ -166,7 +166,7 @@ include $(BUILD_EXECUTABLE)
 # ========================================================
 include $(CLEAR_VARS)
 LOCAL_MODULE := trunks_test
-LOCAL_MODULE_TAGS := debug
+LOCAL_MODULE_TAGS := eng
 LOCAL_CPP_EXTENSION := $(trunksCppExtension)
 LOCAL_CFLAGS := $(trunksCFlags)
 LOCAL_CLANG := true
