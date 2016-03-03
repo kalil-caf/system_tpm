@@ -18,7 +18,7 @@ LOCAL_PATH := $(call my-dir)
 # ========================================================
 trunksCppExtension := .cc
 trunksCFlags := -Wall -Werror -Wno-unused-parameter -DUSE_BINDER_IPC
-trunksIncludes := $(LOCAL_PATH)/.. external/gtest/include
+trunksIncludes := $(LOCAL_PATH)/..
 trunksSharedLibraries := \
   libbinder \
   libbinderwrapper \
