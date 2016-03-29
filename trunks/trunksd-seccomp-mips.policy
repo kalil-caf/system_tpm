@@ -17,12 +17,12 @@
 # TODO: This policy needs to be verified.
 
 gettid: 1
-getuid32: 1
-geteuid32: 1
-getgid32: 1
-getegid32: 1
-getresuid32: 1
-getresgid32: 1
+getuid: 1
+geteuid: 1
+getgid: 1
+getegid: 1
+getresuid: 1
+getresgid: 1
 
 clock_getres: 1
 clock_gettime: 1
