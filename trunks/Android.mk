@@ -18,7 +18,7 @@ LOCAL_PATH := $(call my-dir)
 # ========================================================
 trunksCppExtension := .cc
 trunksCFlags := -Wall -Werror -Wno-unused-parameter -DUSE_BINDER_IPC
-trunksIncludes := $(LOCAL_PATH)/.. external/gtest/include
+trunksIncludes := $(LOCAL_PATH)/..
 trunksSharedLibraries := \
   libbinder \
   libbinderwrapper \
@@ -60,7 +60,7 @@ LOCAL_CFLAGS := $(trunksCFlags)
 LOCAL_CLANG := true
 LOCAL_C_INCLUDES := $(trunksIncludes)
 LOCAL_SHARED_LIBRARIES := $(trunksSharedLibraries)
-LOCAL_STATIC_LIBRARIES := libtrunks_generated
+LOCAL_STATIC_LIBRARIES := libtrunks_generated libgtest_prod
 LOCAL_SRC_FILES := \
   background_command_transceiver.cc \
   blob_parser.cc \
@@ -103,6 +103,7 @@ ifeq ($(BRILLOEMULATOR),true)
 LOCAL_SHARED_LIBRARIES += libtpm2
 endif
 LOCAL_STATIC_LIBRARIES := \
+  libgtest_prod \
   libtrunks_generated \
   libtrunks_common \
 
@@ -138,6 +139,7 @@ LOCAL_CLANG := true
 LOCAL_C_INCLUDES := $(trunksIncludes)
 LOCAL_SHARED_LIBRARIES := $(trunksSharedLibraries)
 LOCAL_STATIC_LIBRARIES := \
+  libgtest_prod \
   libtrunks_common \
   libtrunks_generated \
 
@@ -155,7 +157,7 @@ LOCAL_CFLAGS := $(trunksCFlags)
 LOCAL_CLANG := true
 LOCAL_C_INCLUDES := $(trunksIncludes)
 LOCAL_SHARED_LIBRARIES := $(trunksSharedLibraries) libtrunks
-LOCAL_STATIC_LIBRARIES := libtrunks_common
+LOCAL_STATIC_LIBRARIES := libtrunks_common libgtest_prod
 LOCAL_SRC_FILES := \
   trunks_client.cc \
   trunks_client_test.cc \
@@ -198,7 +200,6 @@ LOCAL_SRC_FILES := \
 
 LOCAL_STATIC_LIBRARIES := \
   libgmock \
-  libgtest \
   libBionicGtestMain \
   libtrunks_common \
   libtrunks_generated \
