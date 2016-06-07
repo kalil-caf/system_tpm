@@ -17,7 +17,12 @@ LOCAL_PATH := $(call my-dir)
 # Common variables
 # ========================================================
 trunksCppExtension := .cc
-trunksCFlags := -Wall -Werror -Wno-unused-parameter -DUSE_BINDER_IPC
+trunksCFlags := \
+  -Wall -Werror \
+  -Wno-unused-parameter \
+  -DUSE_BINDER_IPC \
+  -fvisibility=hidden \
+
 trunksIncludes := $(LOCAL_PATH)/..
 trunksSharedLibraries := \
   libbinder \
@@ -60,7 +65,7 @@ LOCAL_CFLAGS := $(trunksCFlags)
 LOCAL_CLANG := true
 LOCAL_C_INCLUDES := $(trunksIncludes)
 LOCAL_SHARED_LIBRARIES := $(trunksSharedLibraries)
-LOCAL_STATIC_LIBRARIES := libtrunks_generated libgtest_prod
+LOCAL_STATIC_LIBRARIES := libtrunks_generated
 LOCAL_SRC_FILES := \
   background_command_transceiver.cc \
   blob_parser.cc \
@@ -103,12 +108,10 @@ ifeq ($(BRILLOEMULATOR),true)
 LOCAL_SHARED_LIBRARIES += libtpm2
 endif
 LOCAL_STATIC_LIBRARIES := \
-  libgtest_prod \
   libtrunks_generated \
   libtrunks_common \
 
 LOCAL_REQUIRED_MODULES := \
-  com.android.Trunks.conf \
   trunksd-seccomp.policy \
 
 LOCAL_SRC_FILES := \
@@ -138,8 +141,8 @@ LOCAL_CFLAGS := $(trunksCFlags)
 LOCAL_CLANG := true
 LOCAL_C_INCLUDES := $(trunksIncludes)
 LOCAL_SHARED_LIBRARIES := $(trunksSharedLibraries)
-LOCAL_STATIC_LIBRARIES := \
-  libgtest_prod \
+
+LOCAL_WHOLE_STATIC_LIBRARIES := \
   libtrunks_common \
   libtrunks_generated \
 
@@ -157,12 +160,38 @@ LOCAL_CFLAGS := $(trunksCFlags)
 LOCAL_CLANG := true
 LOCAL_C_INCLUDES := $(trunksIncludes)
 LOCAL_SHARED_LIBRARIES := $(trunksSharedLibraries) libtrunks
-LOCAL_STATIC_LIBRARIES := libtrunks_common libgtest_prod
 LOCAL_SRC_FILES := \
   trunks_client.cc \
   trunks_client_test.cc \
 
 include $(BUILD_EXECUTABLE)
+
+# libtrunks_test
+# ========================================================
+include $(CLEAR_VARS)
+LOCAL_MODULE := libtrunks_test
+LOCAL_MODULE_TAGS := eng
+LOCAL_CPP_EXTENSION := $(trunksCppExtension)
+LOCAL_CFLAGS := $(trunksCFlags)
+LOCAL_CLANG := true
+LOCAL_C_INCLUDES := $(trunksIncludes)
+LOCAL_SHARED_LIBRARIES := $(trunksSharedLibraries)
+LOCAL_SRC_FILES := \
+  mock_authorization_delegate.cc \
+  mock_blob_parser.cc \
+  mock_command_transceiver.cc \
+  mock_hmac_session.cc \
+  mock_policy_session.cc \
+  mock_session_manager.cc \
+  mock_tpm.cc \
+  mock_tpm_state.cc \
+  mock_tpm_utility.cc \
+  trunks_factory_for_test.cc \
+
+LOCAL_STATIC_LIBRARIES := \
+  libgmock \
+
+include $(BUILD_STATIC_LIBRARY)
 
 # Target unit tests
 # ========================================================
@@ -178,15 +207,6 @@ LOCAL_SRC_FILES := \
   background_command_transceiver_test.cc \
   hmac_authorization_delegate_test.cc \
   hmac_session_test.cc \
-  mock_authorization_delegate.cc \
-  mock_blob_parser.cc \
-  mock_command_transceiver.cc \
-  mock_hmac_session.cc \
-  mock_policy_session.cc \
-  mock_session_manager.cc \
-  mock_tpm.cc \
-  mock_tpm_state.cc \
-  mock_tpm_utility.cc \
   password_authorization_delegate_test.cc \
   policy_session_test.cc \
   resource_manager.cc \
@@ -196,12 +216,12 @@ LOCAL_SRC_FILES := \
   tpm_generated_test.cc \
   tpm_state_test.cc \
   tpm_utility_test.cc \
-  trunks_factory_for_test.cc \
 
 LOCAL_STATIC_LIBRARIES := \
-  libgmock \
   libBionicGtestMain \
+  libgmock \
   libtrunks_common \
   libtrunks_generated \
+  libtrunks_test \
 
 include $(BUILD_NATIVE_TEST)
