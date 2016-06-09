@@ -106,20 +106,10 @@ LOCAL_STATIC_LIBRARIES := \
   libtpm_manager_server \
   libtpm_manager_common \
   libtpm_manager_generated
-LOCAL_REQUIRED_MODULES := tpm_managerd-seccomp.policy
 LOCAL_SRC_FILES := \
   server/main.cc
 
 include $(BUILD_EXECUTABLE)
-
-# tpm_managerd-seccomp.policy
-# ========================================================
-include $(CLEAR_VARS)
-LOCAL_MODULE := tpm_managerd-seccomp.policy
-LOCAL_MODULE_CLASS := ETC
-LOCAL_MODULE_PATH := $(TARGET_OUT)/usr/share/policy/
-LOCAL_SRC_FILES := server/tpm_managerd-seccomp-$(TARGET_ARCH).policy
-include $(BUILD_PREBUILT)
 
 # libtpm_manager
 # ========================================================
