@@ -21,8 +21,7 @@ trunksCFlags := \
   -Wall -Werror \
   -Wno-unused-parameter \
   -DUSE_BINDER_IPC \
-  -fvisibility=hidden \
-
+  -fvisibility=hidden
 trunksIncludes := $(LOCAL_PATH)/..
 trunksSharedLibraries := \
   libbinder \
@@ -33,7 +32,7 @@ trunksSharedLibraries := \
   libchrome-crypto \
   libcrypto \
   libprotobuf-cpp-lite \
-  libutils \
+  libutils
 
 # libtrunks_generated
 # ========================================================
@@ -51,8 +50,7 @@ LOCAL_SHARED_LIBRARIES := $(trunksSharedLibraries)
 LOCAL_SRC_FILES := \
   interface.proto \
   aidl/android/trunks/ITrunks.aidl \
-  aidl/android/trunks/ITrunksClient.aidl \
-
+  aidl/android/trunks/ITrunksClient.aidl
 LOCAL_AIDL_INCLUDES := $(LOCAL_PATH)/aidl
 include $(BUILD_STATIC_LIBRARY)
 
@@ -79,8 +77,7 @@ LOCAL_SRC_FILES := \
   tpm_generated.cc \
   tpm_state_impl.cc \
   tpm_utility_impl.cc \
-  trunks_factory_impl.cc \
-
+  trunks_factory_impl.cc
 include $(BUILD_STATIC_LIBRARY)
 
 # trunksd
@@ -102,25 +99,21 @@ LOCAL_C_INCLUDES := $(trunksIncludes)
 LOCAL_SHARED_LIBRARIES := \
   $(trunksSharedLibraries) \
   libbrillo-minijail \
-  libminijail \
-
+  libminijail
 ifeq ($(BRILLOEMULATOR),true)
 LOCAL_SHARED_LIBRARIES += libtpm2
 endif
 LOCAL_STATIC_LIBRARIES := \
   libtrunks_generated \
-  libtrunks_common \
-
+  libtrunks_common
 LOCAL_REQUIRED_MODULES := \
-  trunksd-seccomp.policy \
-
+  trunksd-seccomp.policy
 LOCAL_SRC_FILES := \
   resource_manager.cc \
   tpm_handle.cc \
   tpm_simulator_handle.cc \
   trunks_binder_service.cc \
-  trunksd.cc \
-
+  trunksd.cc
 include $(BUILD_EXECUTABLE)
 
 # trunksd-seccomp.policy
@@ -141,14 +134,12 @@ LOCAL_CFLAGS := $(trunksCFlags)
 LOCAL_CLANG := true
 LOCAL_C_INCLUDES := $(trunksIncludes)
 LOCAL_SHARED_LIBRARIES := $(trunksSharedLibraries)
-
 LOCAL_WHOLE_STATIC_LIBRARIES := \
   libtrunks_common \
-  libtrunks_generated \
-
+  libtrunks_generated
 LOCAL_SRC_FILES := \
-  trunks_binder_proxy.cc \
-
+  trunks_binder_proxy.cc
+LOCAL_EXPORT_C_INCLUDE_DIRS := $(LOCAL_PATH)/..
 include $(BUILD_SHARED_LIBRARY)
 
 # trunks_client
@@ -162,8 +153,7 @@ LOCAL_C_INCLUDES := $(trunksIncludes)
 LOCAL_SHARED_LIBRARIES := $(trunksSharedLibraries) libtrunks
 LOCAL_SRC_FILES := \
   trunks_client.cc \
-  trunks_client_test.cc \
-
+  trunks_client_test.cc
 include $(BUILD_EXECUTABLE)
 
 # libtrunks_test
@@ -186,11 +176,9 @@ LOCAL_SRC_FILES := \
   mock_tpm.cc \
   mock_tpm_state.cc \
   mock_tpm_utility.cc \
-  trunks_factory_for_test.cc \
-
+  trunks_factory_for_test.cc
 LOCAL_STATIC_LIBRARIES := \
-  libgmock \
-
+  libgmock
 include $(BUILD_STATIC_LIBRARY)
 
 # Target unit tests
@@ -215,13 +203,11 @@ LOCAL_SRC_FILES := \
   session_manager_test.cc \
   tpm_generated_test.cc \
   tpm_state_test.cc \
-  tpm_utility_test.cc \
-
+  tpm_utility_test.cc
 LOCAL_STATIC_LIBRARIES := \
   libBionicGtestMain \
   libgmock \
   libtrunks_common \
   libtrunks_generated \
-  libtrunks_test \
-
+  libtrunks_test
 include $(BUILD_NATIVE_TEST)
