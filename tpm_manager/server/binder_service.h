@@ -55,7 +55,7 @@ class BinderService : public brillo::Daemon {
   friend class NvramServiceInternal;
   class NvramServiceInternal : public android::tpm_manager::BnTpmNvram {
    public:
-    NvramServiceInternal(TpmNvramInterface* service);
+    explicit NvramServiceInternal(TpmNvramInterface* service);
     ~NvramServiceInternal() override = default;
 
     // ITpmNvram interface.
@@ -95,7 +95,7 @@ class BinderService : public brillo::Daemon {
   friend class OwnershipServiceInternal;
   class OwnershipServiceInternal : public android::tpm_manager::BnTpmOwnership {
    public:
-    OwnershipServiceInternal(TpmOwnershipInterface* service);
+    explicit OwnershipServiceInternal(TpmOwnershipInterface* service);
     ~OwnershipServiceInternal() override = default;
 
     // ITpmOwnership interface.
