@@ -224,8 +224,8 @@ TPM_RC TpmStateImpl::GetCapability(const CapabilityCallback& callback,
 }
 
 TPM_RC TpmStateImpl::CacheTpmProperties() {
-  CapabilityCallback callback =
-      base::Bind([this](const TPMU_CAPABILITIES& capability_data) {
+  CapabilityCallback callback = base::Bind(
+      [](TpmStateImpl* impl, const TPMU_CAPABILITIES& capability_data) {
         uint32_t next_property = 0;
         for (uint32_t i = 0;
              i < capability_data.tpm_properties.count && i < MAX_TPM_PROPERTIES;
@@ -234,11 +234,11 @@ TPM_RC TpmStateImpl::CacheTpmProperties() {
               capability_data.tpm_properties.tpm_property[i];
           VLOG(1) << "TPM Property 0x" << std::hex << property.property
                   << " = 0x" << property.value;
-          tpm_properties_[property.property] = property.value;
+          impl->tpm_properties_[property.property] = property.value;
           next_property = property.property + 1;
         }
         return next_property;
-      });
+      }, base::Unretained(this));
   if (tpm_properties_.empty()) {
     TPM_RC result = GetCapability(callback, TPM_CAP_TPM_PROPERTIES, PT_FIXED,
                                   MAX_TPM_PROPERTIES);
@@ -251,8 +251,8 @@ TPM_RC TpmStateImpl::CacheTpmProperties() {
 }
 
 TPM_RC TpmStateImpl::CacheAlgorithmProperties() {
-  CapabilityCallback callback =
-      base::Bind([this](const TPMU_CAPABILITIES& capability_data) {
+  CapabilityCallback callback = base::Bind(
+      [](TpmStateImpl* impl, const TPMU_CAPABILITIES& capability_data) {
         uint32_t next_property = 0;
         for (uint32_t i = 0;
              i < capability_data.algorithms.count && i < MAX_CAP_ALGS; ++i) {
@@ -260,11 +260,11 @@ TPM_RC TpmStateImpl::CacheAlgorithmProperties() {
               capability_data.algorithms.alg_properties[i];
           VLOG(1) << "Algorithm Properties 0x" << std::hex << property.alg
                   << " = 0x" << property.alg_properties;
-          algorithm_properties_[property.alg] = property.alg_properties;
+          impl->algorithm_properties_[property.alg] = property.alg_properties;
           next_property = property.alg + 1;
         }
         return next_property;
-      });
+      }, base::Unretained(this));
   if (algorithm_properties_.empty()) {
     return GetCapability(callback, TPM_CAP_ALGS, TPM_ALG_FIRST, MAX_CAP_ALGS);
   }
