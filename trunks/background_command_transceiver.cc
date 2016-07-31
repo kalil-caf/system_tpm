@@ -37,7 +37,7 @@ void AssignAndSignal(std::string* destination,
 // A callback which posts another |callback| to a given |task_runner|.
 void PostCallbackToTaskRunner(
     const trunks::CommandTransceiver::ResponseCallback& callback,
-    scoped_refptr<base::SingleThreadTaskRunner> task_runner,
+    const scoped_refptr<base::SingleThreadTaskRunner>& task_runner,
     const std::string& response) {
   base::Closure task = base::Bind(callback, response);
   task_runner->PostTask(FROM_HERE, task);
